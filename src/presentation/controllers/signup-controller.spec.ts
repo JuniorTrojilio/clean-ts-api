@@ -116,7 +116,7 @@ describe('SignUp Controller', () => {
 
   test('should return 500 if EmailValidator throws', () => {
     const { sut, emailValidatorStub } = makeSut()
-    jest.spyOn(emailValidatorStub, 'isValid').mockImplementation(() => {
+    jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => {
       throw new ServerError()
     })
     const httpRequest = {
