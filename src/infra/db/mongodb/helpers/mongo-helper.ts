@@ -1,11 +1,9 @@
-import { MongoClient } from 'mongodb'
-import { disconnect } from 'process'
-
+import { Collection, MongoClient } from 'mongodb'
 let client: MongoClient
 
 export const MongoHelper = {
   async connect (uri: string): Promise<void> {
-    client = await MongoClient.connect(process.env.MONGO_URL as string, {
+    client = await MongoClient.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
@@ -13,5 +11,9 @@ export const MongoHelper = {
 
   async disconnect (): Promise<void> {
     await client.close()
+  },
+
+  getCollection (name: string): Collection {
+    return client.db().collection(name)
   }
 }
