@@ -1,8 +1,10 @@
 import { Collection, MongoClient } from 'mongodb'
 let client: MongoClient
+let lUri: string
 
 export const MongoHelper = {
   async connect (uri: string): Promise<void> {
+    lUri = uri
     client = await MongoClient.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -13,7 +15,11 @@ export const MongoHelper = {
     await client.close()
   },
 
-  getCollection (name: string): Collection {
+  async getCollection (name: string): Promise<Collection> {
+    /* istanbul ignore next */
+    if (!client?.isConnected()) {
+      await this.connect(lUri)
+    }
     return client.db().collection(name)
   },
 
