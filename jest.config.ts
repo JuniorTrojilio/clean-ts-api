@@ -5,7 +5,5 @@ export default {
   testEnvironment: 'node',
   transform: {
     '.+\\.ts$': 'ts-jest'
-  },
-  clearMocks: true,
-  coverageProvider: 'v8'
+  }
 }

@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch"
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
+    "test:unit": "yarn test -- --watch --testPathPattern=spec\\.ts$",
+    "test:integration": "yarn test -- --watch --testPathPattern=test\\.ts$",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:staged": "yarn test --findRelatedTests",
+    "test:ci": "yarn test -- --coverage"
   },
   "keywords": [],
   "author": "",
